@@ -11,4 +11,11 @@ const s3 = new S3({
 
 export const uploadFile = (fileName: string , localFilePath: string) => {
     console.log("Called");
+    const fileContent = fs.readFileSync(localFilePath);
+    const response = s3.upload({
+        Body: fileContent,
+        Bucket: "vercel",
+        Key: fileName
+    }).promise();
+    console.log(response);
 }
