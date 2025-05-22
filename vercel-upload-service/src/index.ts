@@ -10,6 +10,9 @@ import { createClient } from "redis"
 const publisher = createClient();
 publisher.connect();
 
+const subscriber = createClient();
+subscriber.connect();
+
 const app = express();
 
 // Middlewares
@@ -33,6 +36,14 @@ app.post("/deploy" , async (req , res) => {
     console.log(files);
     res.json({
         "id" : id
+    })
+})
+
+app.get("/status" , async (req , res) => {
+    const id = req.query.id;
+    const response = await subscriber.hGet("status" , id as string);
+    res.json({
+        status: response
     })
 })
 
