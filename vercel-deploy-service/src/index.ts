@@ -19,7 +19,9 @@ async function main() {
         const id = res.element
         
         await downloadS3Folder(`output/${id}`)
+        console.log("Downloaded from S3");
         await buildProject(id);
+        console.log("Build Finished");
         copyFinalDist(id);
         publisher.hSet("status", id, "deployed")
     }
