@@ -2,12 +2,9 @@ import { createClient } from "redis";
 import { copyFinalDist, downloadS3Folder } from "./aws";
 import { buildProject } from "./utils";
 
-// Create Redis clients
+// Create Redis clients (but do NOT call connect yet)
 const subscriber = createClient();
-subscriber.connect();
-
 const publisher = createClient();
-publisher.connect();
 
 // Connect both clients
 async function connectClients() {
@@ -38,7 +35,7 @@ async function main() {
       await downloadS3Folder(`output/${id}`);
       await buildProject(id);
       copyFinalDist(id);
-      publisher.hSet("status", id, "deployed")
+      await publisher.hSet("status", id, "deployed");
     } catch (err) {
       console.error("Error processing job:", err);
     }
