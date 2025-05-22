@@ -1,10 +1,10 @@
 // Gives a random id for deployment
-const MAX_LENGTH = 5;
+const MAX_LEN = 5;
 
 export function generate() {
     let ans = "";
-    const subset = "123456789qwertyuiopasdfghjklzxcvbnm"
-    for(let i = 0 ; i < MAX_LENGTH ; i++) {
+    const subset = "123456789qwertyuiopasdfghjklzxcvbnm";
+    for (let i = 0; i < MAX_LEN; i++) {
         ans += subset[Math.floor(Math.random() * subset.length)];
     }
     return ans;
