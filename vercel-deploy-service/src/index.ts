@@ -1,22 +1,25 @@
-import { createClient } from 'redis';
-import { downloadS3Folder } from './aws';
 
+import { createClient, commandOptions } from "redis";
+import {  downloadS3Folder } from "./aws";
+import { buildProject } from "./utils";
 const subscriber = createClient();
+subscriber.connect();
 
-subscriber.on('error', (err: unknown) => console.error('Redis Client Error', err));
+const publisher = createClient();
+publisher.connect();
 
 async function main() {
-    await subscriber.connect();
-
-    while (true) {
-        try {
-            const response = await subscriber.brPop('build-queue', 0);
-            const id = response?.element;
-            await downloadS3Folder(`output/${id}`);
-        } catch (err) {
-            console.error('Error during BRPOP:', err);
-        }
+    while(1) {
+        const res = await subscriber.brPop(
+            commandOptions({ isolated: true }),
+            'build-queue',
+            0
+          );
+        // @ts-ignore;
+        const id = res.element
+        
+        await downloadS3Folder(`output/${id}`)
+        await buildProject(id);
     }
 }
-
 main();
