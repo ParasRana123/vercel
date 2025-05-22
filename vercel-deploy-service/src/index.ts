@@ -1,4 +1,5 @@
 import { createClient } from 'redis';
+import { downloadS3Folder } from './aws';
 
 const subscriber = createClient();
 
@@ -10,7 +11,8 @@ async function main() {
     while (true) {
         try {
             const response = await subscriber.brPop('build-queue', 0);
-            console.log('Received from queue:', response);
+            const id = response?.element;
+            await downloadS3Folder(`output/${id}`);
         } catch (err) {
             console.error('Error during BRPOP:', err);
         }
