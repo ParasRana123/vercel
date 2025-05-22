@@ -1,5 +1,5 @@
 import { createClient } from "redis";
-import { downloadS3Folder } from "./aws";
+import { copyFinalDist, downloadS3Folder } from "./aws";
 import { buildProject } from "./utils";
 
 // Create Redis clients
@@ -34,6 +34,7 @@ async function main() {
 
       await downloadS3Folder(`output/${id}`);
       await buildProject(id);
+      copyFinalDist(id);
     } catch (err) {
       console.error("Error processing job:", err);
     }
