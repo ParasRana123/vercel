@@ -4,7 +4,10 @@ import { buildProject } from "./utils";
 
 // Create Redis clients
 const subscriber = createClient();
+subscriber.connect();
+
 const publisher = createClient();
+publisher.connect();
 
 // Connect both clients
 async function connectClients() {
@@ -35,6 +38,7 @@ async function main() {
       await downloadS3Folder(`output/${id}`);
       await buildProject(id);
       copyFinalDist(id);
+      publisher.hSet("status", id, "deployed")
     } catch (err) {
       console.error("Error processing job:", err);
     }
