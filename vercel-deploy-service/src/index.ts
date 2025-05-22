@@ -1,25 +1,43 @@
-
-import { createClient, commandOptions } from "redis";
-import {  downloadS3Folder } from "./aws";
+import { createClient } from "redis";
+import { downloadS3Folder } from "./aws";
 import { buildProject } from "./utils";
-const subscriber = createClient();
-subscriber.connect();
 
+// Create Redis clients
+const subscriber = createClient();
 const publisher = createClient();
-publisher.connect();
+
+// Connect both clients
+async function connectClients() {
+  try {
+    await subscriber.connect();
+    await publisher.connect();
+    console.log("Connected to Redis");
+  } catch (err) {
+    console.error("Redis connection error:", err);
+    process.exit(1);
+  }
+}
 
 async function main() {
-    while(1) {
-        const res = await subscriber.brPop(
-            commandOptions({ isolated: true }),
-            'build-queue',
-            0
-          );
-        // @ts-ignore;
-        const id = res.element
-        
-        await downloadS3Folder(`output/${id}`)
-        await buildProject(id);
+  await connectClients();
+
+  while (true) {
+    try {
+      const res = await subscriber.brPop('build-queue', 0);
+      if (!res || !res.element) {
+        console.warn("No element received from queue");
+        continue;
+      }
+
+      const id = res.element;
+      console.log("Received build ID:", id);
+
+      await downloadS3Folder(`output/${id}`);
+      await buildProject(id);
+    } catch (err) {
+      console.error("Error processing job:", err);
     }
+  }
 }
+
 main();
