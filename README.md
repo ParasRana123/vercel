@@ -6,18 +6,24 @@ A full-stack, serverless web deployment platform that mirrors Vercel’s workflo
 
 ●  **GitHub Integration** – Deploy apps directly by pasting the repository URL
 
-●  **AWS S3 Storage** – Extracts, stores, and serves production-ready static files from S3
-●  **Automated Build Pipeline** – Simulates CI/CD by running `npm install`, `npm run build`, and `npm run dev`
-●  **Redis Queue Integration** – Asynchronous task handling with queue-based architecture for scalability and efficiency
-●  **Fault-Tolerant Execution** – Build processes decoupled from request-handling to ensure stability during high traffic
-●  **Instant Deployment URLs** – Generates unique links for previewing and sharing deployed projects
+●  **AWS S3 Storage** – Extracts, stores, and serves production-ready static files from S3.
+
+●  **Automated Build Pipeline** – Simulates CI/CD by running `npm install`, `npm run build`, and `npm run dev`.
+
+●  **Redis Queue Integration** – Asynchronous task handling with queue-based architecture for scalability and efficiency.
+
+●  **Fault-Tolerant Execution** – Build processes decoupled from request-handling to ensure stability during high traffic.
+
+●  **Instant Deployment URLs** – Generates unique links for previewing and sharing deployed projects.
 
 ## Tech Stack
 
-- **AI Model**: LLAMA
-- **Frontend**: React, HTML, CSS, TypeScript
-- **Backend**: Node.js, Express.js
-- **Code Execution**: Web Containers
+- **Frontend**: React / HTML / CSS / JavaScript  
+- **Backend**: Node.js, Express  
+- **Queue**: Redis  
+- **Storage**: AWS S3  
+- **Version Control**: GitHub Webhooks / API  
+- **CI/CD Simulation**: Custom automation using `npm` lifecycle scripts 
 
 ## Project Structure
 
