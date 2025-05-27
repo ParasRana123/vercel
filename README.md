@@ -4,17 +4,12 @@ A full-stack, serverless web deployment platform that mirrors Vercel’s workflo
 
 ## Features
 
-●  **GitHub Integration** – Deploy apps directly by pasting the repository URL
-
-●  **AWS S3 Storage** – Extracts, stores, and serves production-ready static files from S3.
-
-●  **Automated Build Pipeline** – Simulates CI/CD by running `npm install`, `npm run build`, and `npm run dev`.
-
-●  **Redis Queue Integration** – Asynchronous task handling with queue-based architecture for scalability and efficiency.
-
-●  **Fault-Tolerant Execution** – Build processes decoupled from request-handling to ensure stability during high traffic.
-
-●  **Instant Deployment URLs** – Generates unique links for previewing and sharing deployed projects.
+- **GitHub Integration** – Deploy apps directly by pasting the repository URL
+- **AWS S3 Storage** – Extracts, stores, and serves production-ready static files from S3
+- **Automated Build Pipeline** – Simulates CI/CD by running `npm install`, `npm run build`, and `npm run dev`
+- **Redis Queue Integration** – Asynchronous task handling with queue-based architecture for scalability and efficiency
+- **Fault-Tolerant Execution** – Build processes decoupled from request-handling to ensure stability during high traffic
+- **Instant Deployment URLs** – Generates unique links for previewing and sharing deployed projects
 
 ## Tech Stack
 
