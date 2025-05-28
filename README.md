@@ -42,8 +42,6 @@ A full-stack, serverless web deployment platform that mirrors Vercel’s workflo
 
 ## Installation
 
-> **Note**: Ensure Node.js (v16+) is installed on your machine.
-
 1. **Clone the Repository**
 
 ```bash
@@ -85,17 +83,17 @@ npm install
     ``` bash
     cd vercel-upload-service
     echo. > .env
+    ```  
+
+    ``` bash
+    cd vercel-deploy-service
+    echo. > .env
     ```
 
-``` bash
-cd vercel-deploy-service
-echo. > .env
-```
-
-``` bash
-cd vercel-request-handler
-echo. > .env
-```
+    ``` bash
+    cd vercel-request-handler
+    echo. > .env
+    ```
 
 7. **Start the vercel-upload-service server**
 
