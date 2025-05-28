@@ -13,7 +13,7 @@ A full-stack, serverless web deployment platform that mirrors Vercel’s workflo
 
 ## Tech Stack
 
-- **Frontend**: React / HTML / CSS / JavaScript  
+- **Frontend**: React, TypeScript 
 - **Backend**: Node.js, Express  
 - **Queue**: Redis  
 - **Storage**: AWS S3  
@@ -23,20 +23,20 @@ A full-stack, serverless web deployment platform that mirrors Vercel’s workflo
 ## Project Structure
 
 ```bash
-├── backend/
-│   ├── src/              
-│        ├── defaults/     # Default prompts for node and react
-│            ├── react.ts
-│            └── node.ts
-│   ├── index.ts           # All main routes in this file
-│   ├── prompts.ts         # format in which the response returned
-│   ├── constants.ts       # Utility file
-│   └── stripindents.ts    # Utility file
-├── frontend/
-│   ├── components/        # Contains various components
-│   ├── hooks/             # Web Container config file
-│   ├── pages/             # Contains landing page
-│   └── types/             # Defined the types of file structure
+├── vercel-upload-service/     # Code for uploading files to S3 
+│   ├── src/           
+│   │     ├── aws.ts         
+│   │     ├── file.ts     
+│   │     ├── index.ts     
+│   │     └── utils.ts   
+├── vercel-deploy-service/    # Code for running the build command
+│   ├── src/        
+│   │     ├── aws.ts             
+│   │     ├── index.ts            
+│   │     └── utils.ts             
+├── vercel-request-handler/   # Code for handling the requests
+│   ├── src/        
+│   │     ├── index.ts  
 └── README.md
 ```
 
@@ -48,39 +48,77 @@ A full-stack, serverless web deployment platform that mirrors Vercel’s workflo
 
 ```bash
 git clone [repository-url]
-cd boult.new
+cd vercel
 ```
 
-2. **Install the Backend dependencies**
+2. **Install the Upload Service dependencies**
 
 ```bash
-cd be
+cd vercel-upload-service
 npm install
 ```
 
-3. **Install the Frontend dependencies**
+3. **Install the Deploy Service dependencies**
+
+```bash
+cd vercel-deploy-service
+npm install
+```
+
+4. **Install the Request Handler dependencies**
+
+```bash
+cd request-handler-service
+npm install
+```
+
+5. **Install the Frontend dependencies**
 
 ```bash
 cd frontend
 npm install
 ```
 
-4. **Set up environment varaibles**
+6. **Create a `.env` file in all the three folders `vercel-upload-service`, `vercel-deploy-service` and `vercel-request-handler`**
 
-> **Note**: Create the .env file in the be folder.
-
-```bash
-echo. > .env
+Navigate to these folders and create a `.env` using:
+``` bash
+cd vercel-upload-service
+echo. > .env
 ```
 
-5. **Start the backend server**
+``` bash
+cd vercel-deploy-service
+echo. > .env
+```
+
+``` bash
+cd vercel-request-handler
+echo. > .env
+```
+
+7. **Start the vercel-upload-service server**
 
 ```bash
-cd be
+cd vercel-upload-service
 npm run dev
 ```
 
-6. **Start the frontend application**
+8. **Start the vercel-deploy-service server**
+
+```bash
+cd vercel-dpeloy-service
+npm run dev
+```
+
+9. **Start the vercel-request-handler server**
+
+```bash
+cd request-handler-service
+npm run dev
+```
+
+10. **Start the frontend application**
 
 ```bash
 cd frontend
