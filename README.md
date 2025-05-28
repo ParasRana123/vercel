@@ -81,11 +81,11 @@ npm install
 
 6. **Create a `.env` file in all the three folders `vercel-upload-service`, `vercel-deploy-service` and `vercel-request-handler`**
 
-Navigate to these folders and create a `.env` using:
-``` bash
-cd vercel-upload-service
-echo. > .env
-```
+    Navigate to these folders and create a `.env` using:
+    ``` bash
+    cd vercel-upload-service
+    echo. > .env
+    ```
 
 ``` bash
 cd vercel-deploy-service
